@@ -14,10 +14,10 @@ namespace SampleApiBackend
             //Configure database
             string connectionString = builder.Configuration.GetConnectionString("Default")
                 ?? throw new InvalidOperationException("No connection string");
-            builder.Services.AddDbContext<SampleDbContext>(o =>
-                o.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<SampleDbContext>(o => o.UseSqlServer(connectionString));
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers(o => o.SuppressAsyncSuffixInActionNames = false);
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
