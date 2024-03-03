@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SampleApiBackend.Database;
 
@@ -10,12 +9,10 @@ using SampleApiBackend.Database;
 
 namespace SampleApiBackend.Migrations
 {
-    [DbContext(typeof(SampleDbContext))]
-    [Migration("20240229124001_CreateDatabase")]
-    partial class CreateDatabase
+    [DbContext(typeof(SoapDbContext))]
+    partial class SoapDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,7 +21,7 @@ namespace SampleApiBackend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SampleApiBackend.Models.Product", b =>
+            modelBuilder.Entity("SampleApiBackend.Models.Soap", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,9 +40,12 @@ namespace SampleApiBackend.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
+                    b.Property<int>("ScentType")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Soaps");
                 });
 #pragma warning restore 612, 618
         }

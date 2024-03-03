@@ -1,0 +1,70 @@
+<div>
+    <h3>Soap Form</h3>
+    
+    <section>
+
+        <form [formGroup]="form" class="form-group" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <label for="name"
+                [ngClass]="{'text-danger': form.get('name')?.invalid && form.get('name')?.touched || form.get('name')?.errors?.['serverError']}">
+                Name:
+            </label>
+            <input id="name" type="text" class="form-control" formControlName="name" placeholder="Soap name"
+                [ngClass]="{'is-invalid': form.get('name')?.invalid && form.get('name')?.touched || form.get('name')?.errors?.['serverError']}">
+            <small
+                *ngIf="form.get('name')?.invalid && form.get('name')?.touched && !form.get('name')?.errors?.['serverError']" class="text-danger">
+                Please enter a name!
+            </small>
+            <!-- Server error backend-ről -->
+            <small
+                *ngIf="form.get('name')?.errors?.['serverError']" class="text-danger">
+                {{form.get('name')?.getError('serverError')}}
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label for="scenttype"
+                [ngClass]="{'text-danger': form.get('scenttype')?.invalid && form.get('scenttype')?.touched || form.get('scenttype')?.errors?.['serverError']}">
+                Scent:
+            </label>
+            <select id="scenttype" formControlName="scenttype">
+                <option disabled>Select scent</option>
+                <option *ngFor="let scent of scents" [value]="scent.name">{{scent.displayName}}</option>
+            </select>
+            <small
+                *ngIf="form.get('scenttype')?.invalid && form.get('scenttype')?.touched && !form.get('scenttype')?.errors?.['serverError']" class="text-danger">
+                Please choose a scent!
+            </small>
+            <!-- Server error backend-ről -->
+            <small
+                *ngIf="form.get('scenttype')?.errors?.['serverError']" class="text-danger">
+                {{form.get('scenttype')?.getError('serverError')}}
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input id="description" type="text" class="form-control" formControlName="description" placeholder="Soap description">
+        </div>
+
+        <div class="form-group">
+            <label for="price"
+                [ngClass]="{'text-danger': form.get('price')?.errors?.['serverError']}">
+                Price:
+            </label>
+            <input id="price" type="number" class="form-control" formControlName="price" min="0"
+                [ngClass]="{'is-invalid': form.get('price')?.errors?.['serverError']}">
+
+            <!-- Server error backend-ről -->
+            <small
+                *ngIf="form.get('price')?.errors?.['serverError']" class="text-danger">
+                {{form.get('price')?.getError('serverError')}}
+            </small>
+        </div>
+        
+        <button [disabled]="form.invalid" type="submit" class="btn btn-outline-success">Save</button>
+
+        </form>
+    </section>
+</div>

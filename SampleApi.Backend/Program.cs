@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SampleApiBackend.Database;
+using SampleApiBackend.Repository;
+using SampleApiBackend.Services;
 
 namespace SampleApiBackend
 {
@@ -14,7 +16,16 @@ namespace SampleApiBackend
             //Configure database
             string connectionString = builder.Configuration.GetConnectionString("Default")
                 ?? throw new InvalidOperationException("No connection string");
-            builder.Services.AddDbContext<SampleDbContext>(o => o.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<SoapDbContext>(o => o.UseSqlServer(connectionString));
+
+            builder.Services.AddScoped<ISoapService, SoapService>();
+            builder.Services.AddScoped<ISoapRepository, SoapRepository>();
+
+            builder.Services.AddCors(o => o
+                    .AddDefaultPolicy(p => p
+                      .AllowAnyMethod()
+                      .AllowAnyHeader()
+                      .WithOrigins("http://localhost:4200")));
 
             builder.Services.AddControllers(o => o.SuppressAsyncSuffixInActionNames = false);
 
@@ -23,6 +34,8 @@ namespace SampleApiBackend
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.UseCors();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -35,12 +48,11 @@ namespace SampleApiBackend
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
             // Database
             using (var scope = app.Services.CreateScope())
-            using (var context = scope.ServiceProvider.GetRequiredService<SampleDbContext>())
+            using (var context = scope.ServiceProvider.GetRequiredService<SoapDbContext>())
             {
                 await context.Database.MigrateAsync();
             }

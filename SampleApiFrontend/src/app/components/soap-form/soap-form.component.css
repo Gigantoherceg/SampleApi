@@ -1,0 +1,17 @@
+h3, section{
+    margin-top: 1rem;
+}
+
+h3 {
+    margin-left: 5%;
+}
+
+section {
+    margin: 1rem 10%;
+}
+
+@media only screen and (min-width: 600px) {
+    section {
+        width: 460px;
+    }
+}
