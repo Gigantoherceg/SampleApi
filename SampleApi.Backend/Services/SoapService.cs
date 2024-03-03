@@ -92,5 +92,27 @@ namespace SampleApiBackend.Services
             
             return result;
         }
+        public async Task<SoapDetailsDto> UpdateSoapById(UpdateSoapDto updateSoapDto)
+        {
+            Soap originSoap = await _soapRepository.GetSoapByIdAsync(updateSoapDto.Id);
+
+            //Id = updateSoapDto.Id,
+            originSoap.Name = updateSoapDto.Name;
+            originSoap.ScentType = (ScentType)Enum.Parse(typeof(ScentType), updateSoapDto.ScentType, true);
+            originSoap.Description = updateSoapDto.Description;
+
+            await _soapRepository.UpdateSoapAsync(originSoap);
+
+            SoapDetailsDto result = new SoapDetailsDto
+            {
+                Id = originSoap.Id,
+                Name = originSoap.Name,
+                ScentType = originSoap.ScentType.GetDisplayName(),
+                Description = originSoap.Description,
+                Price = originSoap.Price
+            };
+
+            return result;
+        }
     }
 }

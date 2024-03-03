@@ -66,6 +66,13 @@ namespace SampleApiBackend.Controllers
             return NoContent();
         }
 
+        [HttpPut]
+        public async Task<ActionResult<SoapDetailsDto>> UpdateSoapByIdAsync(UpdateSoapDto updateSoapDto)
+        {
+            SoapDetailsDto result = await _soapService.UpdateSoapById(updateSoapDto);
+            return Ok(result);
+        }
+
         //// GET: api/Soaps
         //[HttpGet]
         //public async Task<ActionResult<IEnumerable<Soap>>> GetSoaps()

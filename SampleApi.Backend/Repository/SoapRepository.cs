@@ -35,5 +35,11 @@ namespace SampleApiBackend.Repository
             await _soapDbContext.Soaps.AddAsync(soap);
             await _soapDbContext.SaveChangesAsync();
         }
+
+        public async Task UpdateSoapAsync(Soap updatedSoap)
+        {
+            _soapDbContext.Soaps.Update(updatedSoap);
+            await _soapDbContext.SaveChangesAsync();
+        }
     }
 }

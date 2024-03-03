@@ -8,5 +8,6 @@ namespace SampleApiBackend.Repository
         Task<List<Soap>> GetAllSoapsAsync();
         Task<Soap> GetSoapByIdAsync(int soapId);
         Task SaveSoapAsync(Soap soap);
+        Task UpdateSoapAsync(Soap result);
     }
 }

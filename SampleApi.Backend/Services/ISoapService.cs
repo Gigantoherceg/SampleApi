@@ -9,5 +9,6 @@ namespace SampleApiBackend.Services
         Task<List<SoapListItemDto>> GetAllSoapsAsync();
         SoapFormInitDataDto GetFormInitData();
         Task<SoapDetailsDto> GetSoapByIdAsync(int soapId);
+        Task<SoapDetailsDto> UpdateSoapById(UpdateSoapDto updateSoapDto);
     }
 }
