@@ -18,6 +18,7 @@ namespace SampleApiBackend.Services
 
         public async Task<SoapDetailsDto> CreateSoapAsync(CreateSoapDto createSoapDto)
         {
+            //create new soap
             Soap soap = new Soap
             {
                 Name = createSoapDto.Name,
@@ -25,8 +26,10 @@ namespace SampleApiBackend.Services
                 Price = createSoapDto.Price
             };
 
+            //preparation for save
             await _soapRepository.SaveSoapAsync(soap);
 
+            //returning the new soap
             SoapDetailsDto result = new SoapDetailsDto
             {
                 Id = soap.Id,
@@ -46,7 +49,10 @@ namespace SampleApiBackend.Services
 
         public async Task<List<SoapListItemDto>> GetAllSoapsAsync()
         {
+            //get all soaps to list from database
             List<Soap> soaps = await _soapRepository.GetAllSoapsAsync();
+
+            //
             List<SoapListItemDto> result = soaps.Select(soap => new SoapListItemDto
             {
                 Id = soap.Id,
@@ -54,22 +60,6 @@ namespace SampleApiBackend.Services
                 Description = soap.Description,
                 Price = soap.Price,
             }).ToList();
-
-            return result;
-        }
-
-        public SoapFormInitDataDto GetFormInitData()
-        {
-            SoapFormInitDataDto result = new SoapFormInitDataDto
-            {
-                Scents = Enum.GetValues(typeof(ScentType))
-                             .Cast<ScentType>()
-                             .Select(scent => new ScentOptionDto
-                             {
-                                 Name = scent.ToString(),
-                                 DisplayName = scent.GetAttributeOfType<DisplayAttribute>().Name!
-                             }).ToList(),
-            };
 
             return result;
         }
@@ -90,16 +80,19 @@ namespace SampleApiBackend.Services
         }
         public async Task<SoapDetailsDto> UpdateSoapById(UpdateSoapDto updateSoapDto)
         {
+            //search for the soap you want to change
             Soap originSoap = await _soapRepository.GetSoapByIdAsync(updateSoapDto.Id);
 
 
-            //Id = updateSoapDto.Id,
+            //update fields
             originSoap.Name = updateSoapDto.Name;
             originSoap.Description = updateSoapDto.Description;
             originSoap.Price = updateSoapDto.Price;
 
+            //send save to database
             await _soapRepository.UpdateSoapAsync(originSoap);
 
+            //returning the updated soap
             SoapDetailsDto result = new SoapDetailsDto
             {
                 Id = originSoap.Id,

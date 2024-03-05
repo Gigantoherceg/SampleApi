@@ -27,12 +27,15 @@ namespace SampleApiBackend.Repository
 
         public async Task<Soap> GetSoapByIdAsync(int soapId)
         {
+            //thrown an exception if not find a soap with soapId.
             return await _soapDbContext.Soaps.Where(soap => soap.Id == soapId).FirstOrDefaultAsync() ?? throw new ArgumentException($"No soap with this id: {soapId}");
         }
 
         public async Task SaveSoapAsync(Soap soap)
         {
+            //add to database
             await _soapDbContext.Soaps.AddAsync(soap);
+            //save database
             await _soapDbContext.SaveChangesAsync();
         }
 
