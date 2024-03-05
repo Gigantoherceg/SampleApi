@@ -11,8 +11,8 @@ using SampleApiBackend.Database;
 namespace SampleApiBackend.Migrations
 {
     [DbContext(typeof(SoapDbContext))]
-    [Migration("20240301180140_Initialize")]
-    partial class Initialize
+    [Migration("20240304191704_InitDatabase")]
+    partial class InitDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,9 +41,6 @@ namespace SampleApiBackend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ScentType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

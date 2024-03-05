@@ -40,9 +40,6 @@ namespace SampleApiBackend.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("ScentType")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Soaps");

@@ -5,6 +5,7 @@ import { SoapFormDataModel } from '../models/soapFormData.model';
 import { FormInitDataItemModel } from '../models/formInitDataItem.model';
 import { SoapListItemModel } from '../models/soapListItem.model';
 import { SoapDetailsModel } from '../models/soapDetails.model';
+import { UpdateSoapModel } from '../models/updateSoap.model';
 
 const BASE_URL = 'https://localhost:7150/api/Soaps';
 
@@ -12,7 +13,7 @@ const BASE_URL = 'https://localhost:7150/api/Soaps';
   providedIn: 'root'
 })
 export class SoapService {
-
+  
   constructor(private http: HttpClient) { }
 
   createSoap(data: SoapFormDataModel): Observable<any>{
@@ -34,4 +35,9 @@ export class SoapService {
   loadSoapDetails(id: number): Observable<SoapDetailsModel> {
     return this.http.get<SoapDetailsModel>(`${BASE_URL}/${id}`);
   }
+
+  updateSoap(data: UpdateSoapModel): Observable<any>{
+    return this.http.put<any>(BASE_URL,data);
+  }
+
 }

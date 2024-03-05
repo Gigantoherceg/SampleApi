@@ -1,25 +1,25 @@
 <h2>Soaps</h2>
+<h5 *ngIf="soaps.length>1">There are {{soaps.length}} soaps in stock.</h5>
+<h5 *ngIf="soaps.length<2">There are {{soaps.length}} soap in stock.</h5>
 <div class="table-responsive">
 <table id="soap-list-table" class="table table-striped">
     <thead class="thead-dark">
         <tr>
             <th>Name</th>
-            <th>Scent</th>
             <th>Description</th>
             <th>Price</th>
         </tr>
     </thead>
-        <tbody id="soap-list-table-body">
-            <tr *ngFor="let soap of soaps">
-                <td>{{soap.name}}</td>
-                <td>{{soap.scentType}}</td>
-                <td>{{soap.description}}</td>
-                <td>{{soap.price}}</td>
-                <td>
-                    <button class="btn btn-outline-primary" (click)="goToDetails(soap.id)">Details</button>
-                    <button class="btn btn-outline-danger" (click)="deleteSoap(soap.id)">Delete</button>
-                </td>
-            </tr>
-        </tbody>
+    <tbody id="soap-list-table-body">
+        <tr *ngFor="let soap of soaps">
+            <td>{{soap.name}}</td>
+            <td>{{soap.description}}</td>
+            <td>{{soap.price}}</td>
+            <td>
+                <button class="btn btn-primary" (click)="goToDetails(soap.id)">Details</button>
+                <button class="btn btn-danger" (click)="deleteSoap(soap.id)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
 </table>
 </div>

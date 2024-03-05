@@ -1,5 +1,25 @@
-<div *ngIf="soapDetails" class="page-container">
-    <div class="details">
-        <h1 class="name">{{soapDetails.name}}</h1>
+<h1 class="name">{{soapDetails.name}}</h1>
+
+<section>
+<form [formGroup]="form" class="form-group" (ngSubmit)="refresh()">
+    <div class="table-responsive">
+    <table id="soap-details-table" class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input id="name" type="text" class="form-control" formControlName="name"></td>
+                <td><input id="description" type="text" class="form-control" formControlName="description"></td>
+                <td><input id="price" type="number" class="form-control" formControlName="price" min="0"></td>
+                <td><button [disabled]="form.invalid" type="submit" class="btn btn-warning">Save</button></td>
+            </tr>
+        </tbody>
+    </table>
     </div>
-</div>
+</form>
+</section>

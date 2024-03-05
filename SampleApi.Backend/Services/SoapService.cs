@@ -21,7 +21,6 @@ namespace SampleApiBackend.Services
             Soap soap = new Soap
             {
                 Name = createSoapDto.Name,
-                ScentType = (ScentType)Enum.Parse(typeof(ScentType), createSoapDto.ScentType, true),
                 Description = createSoapDto.Description,
                 Price = createSoapDto.Price
             };
@@ -32,7 +31,6 @@ namespace SampleApiBackend.Services
             {
                 Id = soap.Id,
                 Name = createSoapDto.Name,
-                ScentType = soap.ScentType.GetDisplayName(),
                 Description = createSoapDto.Description,
                 Price = createSoapDto.Price
             };
@@ -53,7 +51,6 @@ namespace SampleApiBackend.Services
             {
                 Id = soap.Id,
                 Name = soap.Name,
-                ScentType = soap.ScentType.GetAttributeOfType<DisplayAttribute>().Name!,
                 Description = soap.Description,
                 Price = soap.Price,
             }).ToList();
@@ -85,7 +82,6 @@ namespace SampleApiBackend.Services
             {
                 Id = soap.Id,
                 Name = soap.Name,
-                ScentType = soap.ScentType.GetAttributeOfType<DisplayAttribute>().Name!,
                 Description = soap.Description,
                 Price = soap.Price,
             };
@@ -96,10 +92,11 @@ namespace SampleApiBackend.Services
         {
             Soap originSoap = await _soapRepository.GetSoapByIdAsync(updateSoapDto.Id);
 
+
             //Id = updateSoapDto.Id,
             originSoap.Name = updateSoapDto.Name;
-            originSoap.ScentType = (ScentType)Enum.Parse(typeof(ScentType), updateSoapDto.ScentType, true);
             originSoap.Description = updateSoapDto.Description;
+            originSoap.Price = updateSoapDto.Price;
 
             await _soapRepository.UpdateSoapAsync(originSoap);
 
@@ -107,7 +104,6 @@ namespace SampleApiBackend.Services
             {
                 Id = originSoap.Id,
                 Name = originSoap.Name,
-                ScentType = originSoap.ScentType.GetDisplayName(),
                 Description = originSoap.Description,
                 Price = originSoap.Price
             };
