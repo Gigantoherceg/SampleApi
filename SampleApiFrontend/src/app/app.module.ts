@@ -10,6 +10,7 @@ import { SoapFormComponent } from './components/soap-form/soap-form.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SoapService } from './services/soap.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [SoapService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

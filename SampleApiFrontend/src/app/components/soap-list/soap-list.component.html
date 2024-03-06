@@ -1,6 +1,6 @@
-<h2>Soaps</h2>
-<h5 *ngIf="soaps.length>1">There are {{soaps.length}} soaps in stock.</h5>
-<h5 *ngIf="soaps.length<2">There are {{soaps.length}} soap in stock.</h5>
+<h3 *ngIf="soaps.length>1">There are {{soaps.length}} soaps in stock.</h3>
+<h3 *ngIf="soaps.length==1">There are {{soaps.length}} soap in stock.</h3>
+<h3 *ngIf="soaps.length<1">You haven't stored any soap yet.</h3>
 <div class="table-responsive">
 <table id="soap-list-table" class="table table-striped">
     <thead class="thead-dark">

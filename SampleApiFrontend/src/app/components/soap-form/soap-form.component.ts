@@ -4,6 +4,7 @@ import { SoapService } from '../../services/soap.service';
 import { Router } from '@angular/router';
 import { ScentOptionItemModel } from '../../models/scentOptionItem.model';
 import { validationHandler } from '../../utils/validationHandler';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-soap-form',

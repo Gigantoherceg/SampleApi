@@ -5,6 +5,7 @@ import { SoapService } from '../../services/soap.service';
 import { validationHandler } from '../../utils/validationHandler';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { UpdateSoapModel } from '../../models/updateSoap.model';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-soap-details',
@@ -33,7 +34,7 @@ export class SoapDetailsComponent implements OnInit{
   ngOnInit(): void {
     this.form = this.formbuilder.group({
       name: [null, Validators.required],
-      description: [null, Validators.required],
+      description: [null],
       price: [0, [Validators.required, Validators.min(0)]],
     });
 

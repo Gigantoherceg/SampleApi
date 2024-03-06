@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SoapListItemModel } from '../../models/soapListItem.model';
 import { SoapService } from '../../services/soap.service';
 import { Route, Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-soap-list',
